@@ -35,7 +35,6 @@ async function queryRemote(payload, target) {
             throw new Error("Ogiltig datatyp eller tomt svar från servern.");
         }
 
-        console.log(data.recipes)
         return data.recipes;
 
     } catch(error) {
@@ -75,7 +74,22 @@ searchForm.addEventListener("submit", async function(event) {
         const searchString = searchInput.value.trim();
 
         // Gör något
+        // Rensa eventuella tidigare sökresultat
+        messageElement.textContent = "";
         const result = await queryRemote(searchString, "https://dummyjson.com/recipes/search?q=" )
+    
+        console.log(result)
+        
+        // felhantering / presentera result
+
+        if (result.length === 0) {
+            messageElement.textContent = "INGE MAUD";
+        } else {
+            for (const [key, value] of Object.entries(result[0])) {
+                messageElement.innerHTML += `${key}: ${value}<br>`;
+            }
+        }
+
 
     } catch (error) {
         errorElement.textContent = error.message;
