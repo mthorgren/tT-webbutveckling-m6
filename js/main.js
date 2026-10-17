@@ -12,7 +12,7 @@ const searchInput = document.querySelector("#search");
 
 const errorElement = document.querySelector("#error");
 
-const apiErrorElement = document.querySelector("#message");
+const messageElement = document.querySelector("#message");
 
 // -Funktioner-
 
@@ -39,7 +39,7 @@ async function queryRemote(payload, target) {
         return data.recipes;
 
     } catch(error) {
-        apiErrorElement.textContent = error.message;
+        errorElement.textContent = error.message;
         console.error("Fel:", error.message);
     }
 }
