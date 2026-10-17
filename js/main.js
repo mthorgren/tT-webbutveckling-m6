@@ -28,6 +28,10 @@ const errorElement = document.querySelector("#error");
 searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
+    // Rensa felmeddelanden
+    errorElement.textContent = "";
+
+
     // validera att söktext matades in
     let searchString = searchInput.value;
     if (searchString.trim() == ""){
