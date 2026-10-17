@@ -17,11 +17,15 @@ const errorElement = document.querySelector("#error");
 // Sök på remote API
 
 async function queryRemote(payload, target) {
-        const response = await fetch(target + payload);
+    const response = await fetch(target + payload);
 
-        const data = await response.json();
+    if (!response.ok) {
+        throw new Error("Kunde inte hämta data.");
+    }
 
-        console.log(data)
+    const data = await response.json();
+
+    console.log(data)
 }
 
 // validera sökfält/input
