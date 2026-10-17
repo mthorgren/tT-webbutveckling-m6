@@ -8,6 +8,10 @@
 
 const searchForm = document.querySelector("#searchform");
 
+const searchInput = document.querySelector("#search");
+
+const errorElement = document.querySelector("#error");
+
 // -Funktioner-
 
 // validera sökfält/input
@@ -16,11 +20,24 @@ const searchForm = document.querySelector("#searchform");
 
 // visa felmeddelande
 
+
+
 // -Eventlyssnare- // 
 
 // När användaren klickar på "Sök"
 searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
+
+    // validera att söktext matades in
+    let searchString = searchInput.value;
+    if (searchString.trim() == ""){
+        errorElement.textContent = "Du måste ange söktext.";
+    }
+    console.log(searchString);    
+
+
+
+    
     // Gör något
 });
 
