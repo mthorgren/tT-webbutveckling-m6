@@ -27,21 +27,24 @@ const errorElement = document.querySelector("#error");
 // När användaren klickar på "Sök"
 searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
-
-    // Rensa felmeddelanden
-    errorElement.textContent = "";
-
-
-    // validera att söktext matades in
-    let searchString = searchInput.value;
-    if (searchString.trim() == ""){
-        errorElement.textContent = "Du måste ange söktext.";
-    }
-    console.log(searchString);    
-
-
-
     
+    try { 
+        // Rensa felmeddelanden
+        errorElement.textContent = "";
+        
+        // Spara söktext
+        let searchString = searchInput.value;
+
+        // Validera att söktext matades in
+        if (searchString.trim() == ""){
+            throw new Error("Du måste ange söktext.")
+        }
+    
+    } catch (error) {
+        errorElement.textContent = error.message;
+        console.error("Fel:", error.message);
+    }
+
     // Gör något
 });
 
