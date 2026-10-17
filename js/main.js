@@ -14,6 +14,16 @@ const errorElement = document.querySelector("#error");
 
 // -Funktioner-
 
+// Sök på remote API
+
+async function queryRemote(payload, target) {
+        const response = await fetch(target + payload);
+
+        const data = await response.json();
+
+        console.log(data)
+}
+
 // validera sökfält/input
 
 function validateSearch(value) {
@@ -31,7 +41,7 @@ function validateSearch(value) {
 // -Eventlyssnare- // 
 
 // När användaren klickar på "Sök"
-searchForm.addEventListener("submit", function(event) {
+searchForm.addEventListener("submit", async function(event) {
     event.preventDefault();
     
     try { 
@@ -42,10 +52,10 @@ searchForm.addEventListener("submit", function(event) {
         validateSearch(searchInput.value);
 
         // Spara söktext
-        let searchString = searchInput.value.trim();
+        const searchString = searchInput.value.trim();
 
         // Gör något
-        console.log(searchString)
+        const result = await queryRemote(searchString, "https://dummyjson.com/recipes/search?q=" )
 
     } catch (error) {
         errorElement.textContent = error.message;
