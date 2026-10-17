@@ -16,6 +16,12 @@ const errorElement = document.querySelector("#error");
 
 // validera sökfält/input
 
+function validateSearch(value) {
+    if (value.trim() === "") {
+        throw new Error("Du måste ange söktext.");
+    }
+}
+
 // rensa sökfält
 
 // visa felmeddelande
@@ -29,23 +35,23 @@ searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
     
     try { 
-        // Rensa felmeddelanden
+        // Rensa gamla felmeddelanden
         errorElement.textContent = "";
         
+        // Validera att söktext matades in
+        validateSearch(searchInput.value);
+
         // Spara söktext
         let searchString = searchInput.value;
 
-        // Validera att söktext matades in
-        if (searchString.trim() == ""){
-            throw new Error("Du måste ange söktext.")
-        }
-    
+        // Gör något
+        console.log(searchString)
+
     } catch (error) {
         errorElement.textContent = error.message;
         console.error("Fel:", error.message);
     }
 
-    // Gör något
 });
 
 
