@@ -12,20 +12,36 @@ const searchInput = document.querySelector("#search");
 
 const errorElement = document.querySelector("#error");
 
+const apiErrorElement = document.querySelector("#message");
+
 // -Funktioner-
 
 // Sök på remote API
 
 async function queryRemote(payload, target) {
-    const response = await fetch(target + payload);
+    try {
+        const response = await fetch(target + payload);
 
-    if (!response.ok) {
-        throw new Error("Kunde inte hämta data.");
+        
+        // Kontrollera att anrop fungerar
+        if (!response.ok) {
+            throw new Error("Kunde inte hämta data från servern.");
+        }
+
+        var data = await response.json();
+
+        // Validera att data mottogs, samt att det är av datatyp Array
+        if (!data || !Array.isArray(data.recipes)) {
+            throw new Error("Ogiltig datatyp eller tomt svar från servern.");
+        }
+
+        console.log(data.recipes)
+        return data.recipes;
+
+    } catch(error) {
+        apiErrorElement.textContent = error.message;
+        console.error("Fel:", error.message);
     }
-
-    const data = await response.json();
-
-    console.log(data)
 }
 
 // validera sökfält/input
