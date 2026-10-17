@@ -42,7 +42,7 @@ searchForm.addEventListener("submit", function(event) {
         validateSearch(searchInput.value);
 
         // Spara söktext
-        let searchString = searchInput.value;
+        let searchString = searchInput.value.trim();
 
         // Gör något
         console.log(searchString)
