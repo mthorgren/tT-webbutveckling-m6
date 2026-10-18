@@ -57,17 +57,36 @@ function validateSearch(value) {
 function showRecipe(section, recipe) {
     messageElement.textContent = "KOMMER MAUD";
 
-    const newArticle = document.createElement("article");
-    const newH3 = document.createElement("h3");
-    
-    const newH3Content = document.createTextNode("h3 text");
-    newH3.appendChild(newH3Content);
+    const htmlString = `
+        <article>
+            <h3>${recipe.name}</h3>
 
-    newArticle.appendChild(newH3);
+            <img src="..." alt="...">
+
+            <div class="recipe-info">
+                <p><strong>Servings:</strong> 4</p>
+                <p><strong>Prep time:</strong> 10 minutes</p>
+                <p><strong>Cooking time:</strong> 20 minutes</p>
+                <p><strong>Difficulty:</strong> Easy</p>
+            </div>
+
+            <h4>Ingredients</h4>
+            <ul>
+                <li>Ingredient 1</li>
+                <li>Ingredient 2</li>
+            </ul>
+
+            <h4>Instructions</h4>
+            <ol>
+                <li>First step.</li>
+                <li>Second step.</li>
+            </ol>
+        </article>
+        `;
 
 
     // add to dom
-    section.appendChild(newArticle);
+    section.innerHTML = htmlString;
     
 }
 
