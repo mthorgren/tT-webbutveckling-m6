@@ -1,1 +1,1 @@
-Hello world
+This JavaScript lab builds a recipe search application using an external API. The goal is to use `fetch()` and `async/await` to query *DummyJSON Recipes* and dynamically display the first result in the DOM.
