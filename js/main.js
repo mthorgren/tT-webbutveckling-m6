@@ -1,7 +1,7 @@
 "use strict";
 /*
  * Laboration 6 - Receptsökaren
- * Namn: DITT NAMN
+ * Namn: Mathias Thorgren
  */
 
 // -Hämta element från DOM- //
@@ -16,45 +16,37 @@ const messageElement = document.querySelector("#message");
 
 const recipeSection = document.querySelector("#recipe"); 
 
+// -Funktioner- //
 
 // Sök på remote API
-
 async function queryRemote(payload, target) {
-    try {
-        const response = await fetch(target + payload);
 
-        
-        // Kontrollera att anrop fungerar
-        if (!response.ok) {
-            throw new Error("Kunde inte hämta data från servern.");
-        }
-
-        var data = await response.json();
-
-        // Validera att data mottogs, samt att det är av datatyp Array
-        if (!data || !Array.isArray(data.recipes)) {
-            throw new Error("Ogiltig datatyp eller tomt svar från servern.");
-        }
-
-        return data.recipes;
-
-    } catch(error) {
-        errorElement.textContent = error.message;
-        console.error("Fel:", error.message);
+    const response = await fetch(target + payload);
+    
+    // Kontrollera att anrop fungerar
+    if (!response.ok) {
+        throw new Error("Kunde inte hämta data från servern.");
     }
+
+    const data = await response.json();
+
+    // Validera att data mottogs, samt att det är av datatyp Array
+    if (!data || !Array.isArray(data.recipes)) {
+        throw new Error("Ogiltig datatyp eller tomt svar från servern.");
+    }
+
+    return data.recipes;
 }
 
-// validera sökfält/input
-
+// Validera sökfält/input
 function validateSearch(value) {
     if (value.trim() === "") {
         throw new Error("Du måste ange söktext.");
     }
 }
 
-// create recipe dom structure
+// Skapa HTML struktur via DOM och populera med receptet
 function showRecipe(section, recipe) {
-
     const htmlString = `
         <article>
             <h3>${recipe.name}</h3>
@@ -80,9 +72,8 @@ function showRecipe(section, recipe) {
         </article>
         `;
 
-    // add to dom
+    // Lägg till i DOM
     section.innerHTML = htmlString;
-    
 }
 
 
@@ -121,7 +112,6 @@ async function initiateSearch(event) {
         console.error("Fel:", error.message);
     }
 };
-
 
 
 // -Eventlyssnare- //
