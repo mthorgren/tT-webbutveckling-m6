@@ -56,6 +56,19 @@ function validateSearch(value) {
 // create recipe dom structure
 function showRecipe(section, recipe) {
     messageElement.textContent = "KOMMER MAUD";
+
+    const newArticle = document.createElement("article");
+    const newH3 = document.createElement("h3");
+    
+    const newH3Content = document.createTextNode("h3 text");
+    newH3.appendChild(newH3Content);
+
+    newArticle.appendChild(newH3);
+
+
+    // add to dom
+    section.appendChild(newArticle);
+    
 }
 
 
