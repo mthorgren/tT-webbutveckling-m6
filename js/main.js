@@ -16,7 +16,6 @@ const messageElement = document.querySelector("#message");
 
 const recipeSection = document.querySelector("#recipe"); 
 
-// -Funktioner-
 
 // Sök på remote API
 
@@ -88,11 +87,50 @@ function showRecipe(section, recipe) {
 
 
 
+// När användaren klickar på "Sök"
+async function initiateSearch(event) {
+    event.preventDefault();
+    
+    try { 
+        // Rensa gamla felmeddelanden
+        errorElement.textContent = "";
+        
+        // Validera att söktext matades in
+        validateSearch(searchInput.value);
+
+        // Spara söktext
+        const searchString = searchInput.value.trim();
+
+        // Gör något
+        // Rensa eventuella tidigare sökresultat
+        messageElement.textContent = "";
+        const result = await queryRemote(searchString, "https://dummyjson.com/recipes/search?q=" )
+    
+        // Rensa ev. tidigare recept-presentation
+        recipeSection.innerHTML = "";
+        
+        // felhantering / presentera result
+
+        if (result.length === 0) {
+            messageElement.textContent = "INGE MAUD";
+        } else {
+            showRecipe(recipeSection, result[0]);
+        }
+
+
+    } catch (error) {
+        errorElement.textContent = error.message;
+        console.error("Fel:", error.message);
+    }
+
+};
 
 
 
-// -Eventlyssnare- // 
+// -Eventlyssnare- //
+searchForm.addEventListener("submit", initiateSearch);
 
+/*
 // När användaren klickar på "Sök"
 searchForm.addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -132,3 +170,4 @@ searchForm.addEventListener("submit", async function(event) {
 });
 
 
+*/
