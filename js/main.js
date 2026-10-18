@@ -87,87 +87,42 @@ function showRecipe(section, recipe) {
 
 
 
-// När användaren klickar på "Sök"
+// Orkestrerar sökning med API-anrop och presenterar resultat
+// Utför felhantering och validering
 async function initiateSearch(event) {
     event.preventDefault();
     
     try { 
-        // Rensa gamla felmeddelanden
+        // Rensa ev. tidigare felmeddelanden och sökresultat
         errorElement.textContent = "";
+        messageElement.textContent = "";
         
         // Validera att söktext matades in
         validateSearch(searchInput.value);
 
-        // Spara söktext
+        // Spara valid sökning
         const searchString = searchInput.value.trim();
 
-        // Gör något
-        // Rensa eventuella tidigare sökresultat
-        messageElement.textContent = "";
+        // Utför API-anrop med sökning
         const result = await queryRemote(searchString, "https://dummyjson.com/recipes/search?q=" )
     
         // Rensa ev. tidigare recept-presentation
         recipeSection.innerHTML = "";
         
-        // felhantering / presentera result
-
+        // Om resultat togs mot, presentera receptet
         if (result.length === 0) {
             messageElement.textContent = "INGE MAUD";
         } else {
             showRecipe(recipeSection, result[0]);
         }
 
-
     } catch (error) {
         errorElement.textContent = error.message;
         console.error("Fel:", error.message);
     }
-
 };
 
 
 
 // -Eventlyssnare- //
 searchForm.addEventListener("submit", initiateSearch);
-
-/*
-// När användaren klickar på "Sök"
-searchForm.addEventListener("submit", async function(event) {
-    event.preventDefault();
-    
-    try { 
-        // Rensa gamla felmeddelanden
-        errorElement.textContent = "";
-        
-        // Validera att söktext matades in
-        validateSearch(searchInput.value);
-
-        // Spara söktext
-        const searchString = searchInput.value.trim();
-
-        // Gör något
-        // Rensa eventuella tidigare sökresultat
-        messageElement.textContent = "";
-        const result = await queryRemote(searchString, "https://dummyjson.com/recipes/search?q=" )
-    
-        // Rensa ev. tidigare recept-presentation
-        recipeSection.innerHTML = "";
-        
-        // felhantering / presentera result
-
-        if (result.length === 0) {
-            messageElement.textContent = "INGE MAUD";
-        } else {
-            showRecipe(recipeSection, result[0]);
-        }
-
-
-    } catch (error) {
-        errorElement.textContent = error.message;
-        console.error("Fel:", error.message);
-    }
-
-});
-
-
-*/
