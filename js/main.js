@@ -55,7 +55,6 @@ function validateSearch(value) {
 
 // create recipe dom structure
 function showRecipe(section, recipe) {
-    messageElement.textContent = "KOMMER MAUD";
 
     const htmlString = `
         <article>
@@ -72,18 +71,15 @@ function showRecipe(section, recipe) {
 
             <h4>Ingredients</h4>
             <ul>
-                <li>Ingredient 1</li>
-                <li>Ingredient 2</li>
+                ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join("")}
             </ul>
 
             <h4>Instructions</h4>
             <ol>
-                <li>First step.</li>
-                <li>Second step.</li>
+                ${recipe.instructions.map(step => `<li>${step}</li>`).join("")}
             </ol>
         </article>
         `;
-
 
     // add to dom
     section.innerHTML = htmlString;
@@ -116,7 +112,8 @@ searchForm.addEventListener("submit", async function(event) {
         messageElement.textContent = "";
         const result = await queryRemote(searchString, "https://dummyjson.com/recipes/search?q=" )
     
-        console.log(result)
+        // Rensa ev. tidigare recept-presentation
+        recipeSection.innerHTML = "";
         
         // felhantering / presentera result
 
