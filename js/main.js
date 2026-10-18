@@ -102,7 +102,7 @@ async function initiateSearch(event) {
         
         // Om resultat togs mot, presentera receptet
         if (result.length === 0) {
-            messageElement.textContent = "INGE MAUD";
+            messageElement.textContent = "Inget recept hittades.";
         } else {
             showRecipe(recipeSection, result[0]);
         }
