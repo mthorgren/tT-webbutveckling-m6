@@ -14,6 +14,8 @@ const errorElement = document.querySelector("#error");
 
 const messageElement = document.querySelector("#message");
 
+const recipeSection = document.querySelector("#recipe"); 
+
 // -Funktioner-
 
 // Sök på remote API
@@ -51,9 +53,13 @@ function validateSearch(value) {
     }
 }
 
-// rensa sökfält
+// create recipe dom structure
+function showRecipe(section, recipe) {
+    messageElement.textContent = "KOMMER MAUD";
+}
 
-// visa felmeddelande
+
+
 
 
 
@@ -85,9 +91,7 @@ searchForm.addEventListener("submit", async function(event) {
         if (result.length === 0) {
             messageElement.textContent = "INGE MAUD";
         } else {
-            for (const [key, value] of Object.entries(result[0])) {
-                messageElement.innerHTML += `${key}: ${value}<br>`;
-            }
+            showRecipe(recipeSection, result[0]);
         }
 
 
