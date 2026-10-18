@@ -61,13 +61,13 @@ function showRecipe(section, recipe) {
         <article>
             <h3>${recipe.name}</h3>
 
-            <img src="..." alt="...">
+            <img src="${recipe.image}" alt="Picture of ${recipe.name}">
 
             <div class="recipe-info">
-                <p><strong>Servings:</strong> 4</p>
-                <p><strong>Prep time:</strong> 10 minutes</p>
-                <p><strong>Cooking time:</strong> 20 minutes</p>
-                <p><strong>Difficulty:</strong> Easy</p>
+                <p><strong>Servings:</strong> ${recipe.servings}</p>
+                <p><strong>Prep time:</strong> ${recipe.prepTimeMinutes}</p>
+                <p><strong>Cooking time:</strong> ${recipe.cookTimeMinutes}</p>
+                <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
             </div>
 
             <h4>Ingredients</h4>
